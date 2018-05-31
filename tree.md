@@ -1,11 +1,3 @@
-# 柏林
-# 复恒科技数据中心
-
-- [访问地址](https://datacenter.mdguanjia.com)
-
-# 项目结构
-
-```
 .
 ├── README.md
 ├── build
@@ -91,6 +83,3 @@
 └── tree.md
 
 35 directories, 47 files
-
-```
-
