@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 16:29:26
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-05-31 15:17:51
+ * @Last Modified time: 2018-05-31 16:55:01
  */
 
 module.exports = {
@@ -10,6 +10,5 @@ module.exports = {
   ENV_CONFIG: '"dev"',
   NPM_CONFIG_REPORT: '"false"',
   /* 本地请求时配置api代理 */
-  // BASE_API: '"http://localhost:9528/api/"'
-  BASE_API: '"https://datacenter.mdguanjia.com/hms/tongji/data"'
+  BASE_API: '"http://localhost:1314/api/"'
 }

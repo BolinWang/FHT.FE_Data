@@ -1,11 +1,11 @@
 /*
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:09:27
- * @Last Modified by:   FT.FE.Bolin
- * @Last Modified time: 2018-04-11 17:09:27
+ * @Last Modified by: FT.FE.Bolin
+ * @Last Modified time: 2018-05-31 16:53:16
  */
 
-import { login, logout, getInfo } from '@/api/login'
+import { login, logout } from '@/api/login'
 import { getSessionId, setSessionId, removeSessionId } from '@/utils/auth'
 import defaultAvatar from '@/assets/defaultAvatar.png'
 
@@ -56,14 +56,26 @@ const user = {
     // 获取用户信息
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
-        getInfo(state.sessionId).then(response => {
-          const data = response.data
-          commit('SET_ROLES', data.isAdmin)
-          commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.picUrl || defaultAvatar)
-          resolve(response)
-        }).catch(error => {
-          reject(error)
+        // TODO 等待牛乐的登录
+        // getInfo(state.sessionId).then(response => {
+        //   const data = response.data
+        //   commit('SET_ROLES', data.isAdmin)
+        //   commit('SET_NAME', data.name)
+        //   commit('SET_AVATAR', data.picUrl || defaultAvatar)
+        //   resolve(response)
+        // }).catch(error => {
+        //   reject(error)
+        // })
+
+        const data = {
+          isAdmin: 1,
+          name: '柏林'
+        }
+        commit('SET_ROLES', data.isAdmin)
+        commit('SET_NAME', data.name)
+        commit('SET_AVATAR', data.picUrl || defaultAvatar)
+        resolve({
+          data
         })
       })
     },

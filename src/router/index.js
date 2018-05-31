@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:07:11
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-05-31 15:41:52
+ * @Last Modified time: 2018-05-31 23:32:38
  */
 
 import Vue from 'vue'
@@ -51,132 +51,114 @@ export default new Router({
 })
 
 export const asyncRouterMap = [{
-  path: '/example',
+  path: '/data_register',
   component: Layout,
   redirect: 'noredirect',
-  name: '示例',
-  icon: 'example',
-  meta: {
-    role: ['admin', 'global']
-  },
-  children: [{
-    path: 'image',
-    component: _import('example/image'),
-    name: '图片组件'
-  }, {
-    path: 'grid',
-    component: _import('example/tablePagenation'),
-    name: '表格组件'
-  }]
-}, {
-  path: '/dataViews',
-  component: Layout,
-  redirect: 'noredirect',
-  icon: 'example',
+  icon: 'eye',
   meta: {
     role: ['admin', 'global']
   },
   noDropdown: true,
   children: [{
-    path: 'register',
+    path: 'view',
     component: _import('dataViews/data_register'),
     name: '注册数据'
   }]
 }, {
-  path: '/dataViews',
+  path: '/data_customer',
   component: Layout,
   redirect: 'noredirect',
-  icon: 'example',
+  icon: 'people',
   meta: {
     role: ['admin', 'global']
   },
   noDropdown: true,
   children: [{
-    path: 'register',
+    path: 'view',
     component: _import('dataViews/data_customer'),
     name: '租客数据'
   }]
 }, {
-  path: '/dataViews',
+  path: '/data_message',
   component: Layout,
   redirect: 'noredirect',
-  icon: 'example',
+  icon: 'email',
   meta: {
     role: ['admin', 'global']
   },
   noDropdown: true,
   children: [{
-    path: 'register',
+    path: 'view',
     component: _import('dataViews/data_message'),
     name: '短信数据'
   }]
 }, {
-  path: '/dataViews',
+  path: '/data_house',
   component: Layout,
   redirect: 'noredirect',
-  icon: 'example',
+  icon: 'table',
   meta: {
     role: ['admin', 'global']
   },
   noDropdown: true,
   children: [{
-    path: 'register',
+    path: 'view',
     component: _import('dataViews/data_house'),
     name: '房源数据'
   }]
 }, {
-  path: '/dataViews',
+  path: '/data_contract',
   component: Layout,
   redirect: 'noredirect',
-  icon: 'example',
+  icon: 'form',
   meta: {
     role: ['admin', 'global']
   },
   noDropdown: true,
   children: [{
-    path: 'register',
+    path: 'view',
     component: _import('dataViews/data_contract'),
     name: '合同数据'
   }]
 }, {
-  path: '/dataViews',
+  path: '/data_payMoney',
   component: Layout,
   redirect: 'noredirect',
-  icon: 'example',
+  icon: 'money',
   meta: {
     role: ['admin', 'global']
   },
   noDropdown: true,
   children: [{
-    path: 'register',
+    path: 'view',
     component: _import('dataViews/data_payMoney'),
     name: '交易额数据'
   }]
 }, {
-  path: '/dataViews',
+  path: '/data_fhAccount',
   component: Layout,
   redirect: 'noredirect',
-  icon: 'example',
+  icon: 'star',
   meta: {
     role: ['admin', 'global']
   },
   noDropdown: true,
   children: [{
-    path: 'register',
+    path: 'view',
     component: _import('dataViews/data_fhAccount'),
     name: '复恒公账数据'
   }]
 }, {
-  path: '/dataViews',
+  path: '/data_gateLock',
   component: Layout,
   redirect: 'noredirect',
-  icon: 'example',
+  icon: 'password',
   meta: {
     role: ['admin', 'global']
   },
   noDropdown: true,
   children: [{
-    path: 'register',
+    path: 'view',
     component: _import('dataViews/data_gateLock'),
     name: '门锁数据'
   }]

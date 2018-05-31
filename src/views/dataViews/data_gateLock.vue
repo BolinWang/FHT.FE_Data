@@ -1,59 +1,34 @@
 /*
- * @Author: FT.FE.Bolin 
- * @Date: 2018-04-11 17:11:19 
+ * @Author: FT.FE.Bolin
+ * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-04-12 17:10:05
+ * @Last Modified time: 2018-05-31 23:24:26
  */
 
 <template>
   <div class="layout-container">
-    <el-form :inline="true" :model="formOptions" size="small">
-      <el-form-item label="审批人">
-        <el-input v-model="formOptions.user" placeholder="审批人"></el-input>
-      </el-form-item>
-      <el-form-item label="活动区域">
-        <el-select v-model="formOptions.region" placeholder="活动区域">
-          <el-option label="区域一" value="上海"></el-option>
-          <el-option label="区域二" value="北京"></el-option>
-        </el-select>
-      </el-form-item>
+    <el-form :inline="true" size="small">
       <el-form-item>
-        <el-button type="primary" @click="handleSearch">查询</el-button>
+        <el-button type="primary" icon="el-icon-upload" @click="handleExport">导出</el-button>
       </el-form-item>
     </el-form>
     <GridUnit
       ref="refGridUnit"
       :columns="colModels"
       :url="url"
-      :dataMethod="method"
-      :formOptions="formOptions"
+      :listField="`dataObject.dataList`"
       :height="tableHeight"
-      :showExpand="true"
-      :expandColums="expandColums">
-      <template slot="handle" slot-scope="scope">
-        <el-button type="primary" icon="el-icon-view" size="small"
-          @click="handleView(scope.$index)">
-          再来一个表格吧
-        </el-button>
-      </template>
+      show-summary
+      :summary-method="getSummaries"
+      :showPagination="false">
     </GridUnit>
-    <div>
-      <el-dialog title="你知道的  这是第二个表格" width="100%" :visible.sync="layer_show" style="text-align: center;">
-        <GridUnit
-          ref="refGridUnit_view"
-          :columns="colModels_view"
-          :url="url"
-          :dataMethod="method"
-          maxHeight="300">
-        </GridUnit>
-      </el-dialog>
-    </div>
   </div>
 </template>
 <script>
 import GridUnit from '@/components/GridUnit/grid'
+import { exportGateLockApi } from '@/api/dataReport'
 export default {
-  name: 'example-grid',
+  name: 'data_gateLock',
   components: {
     GridUnit
   },
@@ -62,57 +37,36 @@ export default {
   },
   data() {
     return {
-      layer_show: false,
       tableHeight: 300,
-      formOptions: {
-        user: '',
-        region: ''
-      },
       colModels: [
-        {
-          prop: 'activityStatus',
-          label: '状态',
-          width: 80,
-          type: 'status',
-          unitFilters: {
-            renderStatusType(status) {
-              const statusMap = {
-                '1': 'info',
-                '2': 'success',
-                '3': 'danger'
-              }
-              return statusMap[status] || 'success'
-            },
-            renderStatusValue(status) {
-              const statusStrData = ['待上线', '已上线', '已下线']
-              return statusStrData[status - 1] || '已上线'
-            }
+        {prop: 'cityName', label: '城市'},
+        {prop: 'needCount', label: '需安装数', sortable: true},
+        {prop: 'alreadyCount', label: '已安装数', sortable: true},
+        {prop: 'notInstallCount', label: '未安装数', sortable: true},
+        {prop: 'installRatio',
+          label: '安装率 %',
+          sortable: true,
+          render(row) {
+            return row.installRatio.replace(/%/gi, '') * 1
           }
         },
-        {prop: 'title', label: '标题'},
-        {prop: 'picUrl', label: '图片', width: 60, type: 'img'},
-        {prop: 'linkUrl', label: '链接', type: 'link'},
-        {prop: 'effectiveTime', label: '上线时间', width: 180, filter: 'parseTime', sortable: true},
-        {prop: 'ineffectiveTime', label: '下线时间', width: 180, filter: 'parseTime'},
-        {prop: 'introduction', label: '简介'},
-        {label: '操作', slotName: 'handle', width: 160}
+        {prop: 'linkRatio',
+          label: '连通率 %',
+          sortable: true,
+          render(row) {
+            return row.linkRatio.replace(/%/gi, '') * 1
+          }
+        },
+        {prop: 'linkCount', label: '连接数', sortable: true}
       ],
-      colModels_view: [
-        {prop: 'title', label: '标题'}
-      ],
-      expandColums: [
-        {prop: 'title', label: '标题'},
-        {prop: 'introduction', label: '简介'}
-      ],
-      url: '/market/activity',
-      method: 'queryActivityListByPage'
+      url: 'getDeviceStatusList'
     }
   },
   mounted() {
     /* 表格高度控制 */
     this.$nextTick(() => {
       const offsetTop = this.$refs.refGridUnit.$el.offsetTop || 140
-      const pagenationH = 55
+      const pagenationH = 5
       const containerPadding = 20
       let temp_height = document.body.clientHeight - offsetTop - pagenationH - containerPadding
       this.tableHeight = temp_height > 300 ? temp_height : 300
@@ -128,12 +82,60 @@ export default {
 
   },
   methods: {
-    handleView(index) {
-      this.$message.success('柏林爸爸' + index)
-      this.layer_show = true
+    /* 导出 */
+    handleExport() {
+      this.downloadLoading = true
+      exportGateLockApi(this.params).then(response => {
+        response.dataObject.map((item, index) => {
+          item.index = index * 1 + 1
+        })
+        require.ensure([], () => {
+          const { export_json_to_excel } = require('@/vendor/Export2Excel')
+          const tHeader = this.colModels.map((item) => {
+            return item.label
+          })
+          const filterVal = this.colModels.map((item) => {
+            return item.prop
+          })
+          const data = this.formatJson(['index', ...filterVal], response.dataObject || [])
+          export_json_to_excel(['序号', ...tHeader], data, `门锁数据${this.params.startDateStr} - ${this.params.endDateStr}`, `门锁数据${this.params.startDateStr} - ${this.params.endDateStr}`)
+          this.downloadLoading = false
+        })
+      })
     },
-    handleSearch() {
-      this.$refs.refGridUnit.searchHandler()
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => {
+        return v[j]
+      }))
+    },
+    getSummaries(param) {
+      const { columns, data } = param
+      const sums = []
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = '合计'
+          return
+        }
+        const values = data.map(item => {
+          if (column.property === 'installRatio' || column.property === 'linkRatio') {
+            return item[column.property].replace(/%/gi, '') * 1
+          }
+          return Number(item[column.property])
+        })
+        if (!values.every(value => isNaN(value))) {
+          sums[index] = values.reduce((prev, curr) => {
+            const value = Number(curr)
+            if (!isNaN(value)) {
+              return prev + curr
+            } else {
+              return prev
+            }
+          }, 0)
+        } else {
+          sums[index] = ''
+        }
+      })
+      return sums
     }
   }
 }

@@ -1,59 +1,76 @@
 /*
- * @Author: FT.FE.Bolin 
- * @Date: 2018-04-11 17:11:19 
+ * @Author: FT.FE.Bolin
+ * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-04-12 17:10:05
+ * @Last Modified time: 2018-05-31 23:51:14
  */
 
 <template>
   <div class="layout-container">
     <el-form :inline="true" :model="formOptions" size="small">
-      <el-form-item label="审批人">
-        <el-input v-model="formOptions.user" placeholder="审批人"></el-input>
-      </el-form-item>
-      <el-form-item label="活动区域">
-        <el-select v-model="formOptions.region" placeholder="活动区域">
-          <el-option label="区域一" value="上海"></el-option>
-          <el-option label="区域二" value="北京"></el-option>
+      <el-form-item>
+        <el-select v-model="formOptions.timeType" style="width: 100px;">
+          <el-option label="日" :value="1"></el-option>
+          <el-option label="月" :value="2"></el-option>
         </el-select>
       </el-form-item>
+      <el-form-item v-if="formOptions.timeType === 1">
+        <el-date-picker
+          v-model="formOptions.timeValue"
+          type="daterange"
+          align="right"
+          unlink-panels
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          :picker-options="pickerOptions"
+          value-format="yyyy-MM-dd"
+          @change="dateChange">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item v-else>
+        <el-date-picker
+          v-model="formOptions.startMonth"
+          type="month"
+          align="right"
+          placeholder="开始月份"
+          style="width: 150px;"
+          value-format="yyyy-MM"
+          @change="startChange">
+        </el-date-picker>
+        <span class="text-center"> -- </span>
+          <el-date-picker
+            v-model="formOptions.endMonth"
+            type="month"
+            align="right"
+            placeholder="结束月份"
+            style="width: 150px;"
+            value-format="yyyy-MM"
+            @change="endChange">
+          </el-date-picker>
+      </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="handleSearch">查询</el-button>
+        <el-button type="primary" icon="el-icon-search" @click="handleSearch">查询</el-button>
+        <el-button type="primary" icon="el-icon-upload" @click="handleExport">导出</el-button>
       </el-form-item>
     </el-form>
     <GridUnit
       ref="refGridUnit"
       :columns="colModels"
       :url="url"
-      :dataMethod="method"
-      :formOptions="formOptions"
+      :formOptions="params"
       :height="tableHeight"
-      :showExpand="true"
-      :expandColums="expandColums">
-      <template slot="handle" slot-scope="scope">
-        <el-button type="primary" icon="el-icon-view" size="small"
-          @click="handleView(scope.$index)">
-          再来一个表格吧
-        </el-button>
-      </template>
+      show-summary
+      :showPagination="false">
     </GridUnit>
-    <div>
-      <el-dialog title="你知道的  这是第二个表格" width="100%" :visible.sync="layer_show" style="text-align: center;">
-        <GridUnit
-          ref="refGridUnit_view"
-          :columns="colModels_view"
-          :url="url"
-          :dataMethod="method"
-          maxHeight="300">
-        </GridUnit>
-      </el-dialog>
-    </div>
   </div>
 </template>
 <script>
 import GridUnit from '@/components/GridUnit/grid'
+import { deepClone, parseTime } from '@/utils'
+import { exportCustomerApi } from '@/api/dataReport'
 export default {
-  name: 'example-grid',
+  name: 'data_customer',
   components: {
     GridUnit
   },
@@ -61,58 +78,73 @@ export default {
 
   },
   data() {
+    const now = new Date()
+    const nowY = now.getFullYear()
+    const nowM = now.getMonth()
+    const nowD = now.getDate()
     return {
-      layer_show: false,
       tableHeight: 300,
+      pickerOptions: {
+        shortcuts: [{
+          text: '最近一周',
+          onClick(picker) {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+            picker.$emit('pick', [start, end])
+          }
+        }, {
+          text: '最近一个月',
+          onClick(picker) {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+            picker.$emit('pick', [start, end])
+          }
+        }, {
+          text: '最近三个月',
+          onClick(picker) {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+            picker.$emit('pick', [start, end])
+          }
+        }]
+      },
       formOptions: {
-        user: '',
-        region: ''
+        timeType: 1,
+        timeValue: [
+          parseTime(new Date(nowY, nowM, nowD), '{y}-{m}-{d}'),
+          parseTime(new Date(nowY, nowM, nowD), '{y}-{m}-{d}')
+        ],
+        startMonth: '',
+        endMonth: ''
+      },
+      params: {
+        startDateStr: '',
+        endDateStr: ''
       },
       colModels: [
-        {
-          prop: 'activityStatus',
-          label: '状态',
-          width: 80,
-          type: 'status',
-          unitFilters: {
-            renderStatusType(status) {
-              const statusMap = {
-                '1': 'info',
-                '2': 'success',
-                '3': 'danger'
-              }
-              return statusMap[status] || 'success'
-            },
-            renderStatusValue(status) {
-              const statusStrData = ['待上线', '已上线', '已下线']
-              return statusStrData[status - 1] || '已上线'
-            }
-          }
-        },
-        {prop: 'title', label: '标题'},
-        {prop: 'picUrl', label: '图片', width: 60, type: 'img'},
-        {prop: 'linkUrl', label: '链接', type: 'link'},
-        {prop: 'effectiveTime', label: '上线时间', width: 180, filter: 'parseTime', sortable: true},
-        {prop: 'ineffectiveTime', label: '下线时间', width: 180, filter: 'parseTime'},
-        {prop: 'introduction', label: '简介'},
-        {label: '操作', slotName: 'handle', width: 160}
+        {prop: 'createTime', label: '时间', width: 150, filter: 'parseTime', sortable: true},
+        {prop: 'customerNormalForMJCount', label: '麦家普通租客', sortable: true},
+        {prop: 'customerFinanceForMJCount', label: '麦家金融租客', sortable: true},
+        {prop: 'customerNormalForNotMJCount', label: '非麦家普通租客', sortable: true},
+        {prop: 'customerFinanceForNotMJCount', label: '非麦家金融租客', sortable: true}
       ],
-      colModels_view: [
-        {prop: 'title', label: '标题'}
-      ],
-      expandColums: [
-        {prop: 'title', label: '标题'},
-        {prop: 'introduction', label: '简介'}
-      ],
-      url: '/market/activity',
-      method: 'queryActivityListByPage'
+      url: 'queryTenants'
     }
+  },
+  created() {
+    let cloneParams = deepClone(this.formOptions)
+    this.params.timeType = cloneParams.timeType
+    this.params.startDateStr = cloneParams.timeValue[0]
+    this.params.endDateStr = cloneParams.timeValue[1]
   },
   mounted() {
     /* 表格高度控制 */
     this.$nextTick(() => {
       const offsetTop = this.$refs.refGridUnit.$el.offsetTop || 140
-      const pagenationH = 55
+      const pagenationH = 5
       const containerPadding = 20
       let temp_height = document.body.clientHeight - offsetTop - pagenationH - containerPadding
       this.tableHeight = temp_height > 300 ? temp_height : 300
@@ -128,12 +160,45 @@ export default {
 
   },
   methods: {
-    handleView(index) {
-      this.$message.success('柏林爸爸' + index)
-      this.layer_show = true
-    },
     handleSearch() {
+      this.params.timeType = this.formOptions.timeType
       this.$refs.refGridUnit.searchHandler()
+    },
+    dateChange(val) {
+      this.params.startDateStr = val[0]
+      this.params.endDateStr = val[1]
+    },
+    startChange(val) {
+      this.params.startDateStr = val
+    },
+    endChange(val) {
+      this.params.endDateStr = val
+    },
+    /* 导出 */
+    handleExport() {
+      this.downloadLoading = true
+      exportCustomerApi(this.params).then(response => {
+        response.dataObject.map((item, index) => {
+          item.index = index * 1 + 1
+        })
+        require.ensure([], () => {
+          const { export_json_to_excel } = require('@/vendor/Export2Excel')
+          const tHeader = this.colModels.map((item) => {
+            return item.label
+          })
+          const filterVal = this.colModels.map((item) => {
+            return item.prop
+          })
+          const data = this.formatJson(['index', ...filterVal], response.dataObject || [])
+          export_json_to_excel(['序号', ...tHeader], data, `租客数据${this.params.startDateStr} - ${this.params.endDateStr}`, `租客数据${this.params.startDateStr} - ${this.params.endDateStr}`)
+          this.downloadLoading = false
+        })
+      })
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => {
+        return v[j]
+      }))
     }
   }
 }

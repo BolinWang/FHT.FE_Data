@@ -1,8 +1,8 @@
 /*
- * @Author: FT.FE.Bolin 
- * @Date: 2018-04-11 16:47:22 
+ * @Author: FT.FE.Bolin
+ * @Date: 2018-04-11 16:47:22
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-04-12 17:09:07
+ * @Last Modified time: 2018-05-31 20:45:57
  */
 <template>
   <div class="model-table-pagenation">
@@ -47,7 +47,7 @@
         @current-change="(currentRow, oldCurrentRow) => emitEventHandler('current-change', currentRow, oldCurrentRow)"
         @header-dragend="(newWidth, oldWidth, column, event) => emitEventHandler('header-dragend', newWidth, oldWidth, column, event)"
         @expand-change="(row, expanded) => emitEventHandler('expand-change', row, expanded)" >
-        <el-table-column v-if="showRowIndex" type="index" width="40" align="center"></el-table-column>
+        <el-table-column v-if="showRowIndex" type="index" width="60" align="center"></el-table-column>
         <el-table-column v-if="showExpand" type="expand" width="40">
           <template slot-scope="scope">
             <el-form label-position="left" size="small" inline class="table-expand">
@@ -140,7 +140,7 @@
   import Vue from 'vue'
   import props from './props'
   import { fetch } from '@/utils/fetch'
-  import { ObjectMap, deepClone } from '@/utils'
+  import { deepClone } from '@/utils'
   export default {
     name: 'fht-table-pagination',
     components: {},
@@ -194,11 +194,10 @@
         this.loading = true
         let params
         const {
-          url, dataMethod,
-          listField, pageNoKey, pageSizeKey,
+          url, listField, pageNoKey, pageSizeKey,
           totalField, showPagination, pagination
         } = this
-        params = ObjectMap(deepClone(this.searchParams))
+        params = deepClone(this.searchParams)
         if (showPagination) {
           params = Object.assign(params, {
             [pageNoKey]: pagination.pageNo,
@@ -210,10 +209,7 @@
           this.loading = false
           return false
         }
-        fetch(url, {
-          method: dataMethod,
-          params
-        }).then(response => {
+        fetch(url, params).then(response => {
           let result = response
           if (response && !(response instanceof Array)) {
             if (listField && listField.indexOf('.') !== -1) {
