@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:07:11
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-04-11 17:08:06
+ * @Last Modified time: 2018-05-31 15:41:52
  */
 
 import Vue from 'vue'
@@ -67,6 +67,118 @@ export const asyncRouterMap = [{
     path: 'grid',
     component: _import('example/tablePagenation'),
     name: '表格组件'
+  }]
+}, {
+  path: '/dataViews',
+  component: Layout,
+  redirect: 'noredirect',
+  icon: 'example',
+  meta: {
+    role: ['admin', 'global']
+  },
+  noDropdown: true,
+  children: [{
+    path: 'register',
+    component: _import('dataViews/data_register'),
+    name: '注册数据'
+  }]
+}, {
+  path: '/dataViews',
+  component: Layout,
+  redirect: 'noredirect',
+  icon: 'example',
+  meta: {
+    role: ['admin', 'global']
+  },
+  noDropdown: true,
+  children: [{
+    path: 'register',
+    component: _import('dataViews/data_customer'),
+    name: '租客数据'
+  }]
+}, {
+  path: '/dataViews',
+  component: Layout,
+  redirect: 'noredirect',
+  icon: 'example',
+  meta: {
+    role: ['admin', 'global']
+  },
+  noDropdown: true,
+  children: [{
+    path: 'register',
+    component: _import('dataViews/data_message'),
+    name: '短信数据'
+  }]
+}, {
+  path: '/dataViews',
+  component: Layout,
+  redirect: 'noredirect',
+  icon: 'example',
+  meta: {
+    role: ['admin', 'global']
+  },
+  noDropdown: true,
+  children: [{
+    path: 'register',
+    component: _import('dataViews/data_house'),
+    name: '房源数据'
+  }]
+}, {
+  path: '/dataViews',
+  component: Layout,
+  redirect: 'noredirect',
+  icon: 'example',
+  meta: {
+    role: ['admin', 'global']
+  },
+  noDropdown: true,
+  children: [{
+    path: 'register',
+    component: _import('dataViews/data_contract'),
+    name: '合同数据'
+  }]
+}, {
+  path: '/dataViews',
+  component: Layout,
+  redirect: 'noredirect',
+  icon: 'example',
+  meta: {
+    role: ['admin', 'global']
+  },
+  noDropdown: true,
+  children: [{
+    path: 'register',
+    component: _import('dataViews/data_payMoney'),
+    name: '交易额数据'
+  }]
+}, {
+  path: '/dataViews',
+  component: Layout,
+  redirect: 'noredirect',
+  icon: 'example',
+  meta: {
+    role: ['admin', 'global']
+  },
+  noDropdown: true,
+  children: [{
+    path: 'register',
+    component: _import('dataViews/data_fhAccount'),
+    name: '复恒公账数据'
+  }]
+}, {
+  path: '/dataViews',
+  component: Layout,
+  redirect: 'noredirect',
+  icon: 'example',
+  meta: {
+    role: ['admin', 'global']
+  },
+  noDropdown: true,
+  children: [{
+    path: 'register',
+    component: _import('dataViews/data_gateLock'),
+    name: '门锁数据'
   }]
 }, {
   path: '*',
