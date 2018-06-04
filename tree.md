@@ -1,3 +1,5 @@
+```
+
 .
 ├── README.md
 ├── build
@@ -13,6 +15,15 @@
 │   ├── index.js
 │   ├── prod.env.js
 │   └── sit.env.js
+├── dist
+│   ├── favicon.ico
+│   ├── index.html
+│   └── static
+│       ├── css
+│       ├── fonts
+│       ├── img
+│       ├── js
+│       └── loading-spin.svg
 ├── favicon.ico
 ├── index.html
 ├── package.json
@@ -82,4 +93,6 @@
 │   └── loading-spin.svg
 └── tree.md
 
-35 directories, 47 files
+41 directories, 50 files
+
+```
