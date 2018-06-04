@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:24:18
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-01 00:03:17
+ * @Last Modified time: 2018-06-04 13:36:11
  */
 
 import Vue from 'vue'
@@ -38,56 +38,31 @@ Object.keys(filters).forEach(key => {
 const whiteList = ['/login']
 router.beforeEach((to, from, next) => {
   NProgress.start()
-  //TODO 等待登录接口
-  if (to.path === '/login') {
-    next({ path: '/' })
-  } else {
-    if (store.getters.roles.length === 0) {
-      store.dispatch('GetInfo').then(res => {
-        const rolesMap = {
-          '1': 'admin',
-          '99': 'service',
-          '0': 'global'
-        }
-        const roles = [(rolesMap[res.data.isAdmin.toString()] || 'global')]
-        store.dispatch('GenerateRoutes', { roles }).then(() => {
-          router.addRoutes(store.getters.addRouters)
-          next({ ...to })
-        })
-      })
+  if (getSessionId()) {
+    if (to.path === '/login') {
+      next({ path: '/' })
     } else {
+      if (store.getters.roles.length === 0) {
+        store.dispatch('GetInfo').then(res => {
+          const rolesMap = ['global', 'admin']
+          const roles = [(rolesMap[res.dataObject.isAdmin] || 'global')]
+          store.dispatch('GenerateRoutes', { roles }).then(() => {
+            router.addRoutes(store.getters.addRouters)
+            next({ ...to })
+          })
+        })
+      } else {
+        next()
+      }
+    }
+  } else {
+    if (whiteList.indexOf(to.path) !== -1) {
       next()
+    } else {
+      next('/login')
+      NProgress.done()
     }
   }
-  // if (getSessionId()) {
-  //   if (to.path === '/login') {
-  //     next({ path: '/' })
-  //   } else {
-  //     if (store.getters.roles.length === 0) {
-  //       store.dispatch('GetInfo').then(res => {
-  //         const rolesMap = {
-  //           '1': 'admin',
-  //           '99': 'service',
-  //           '0': 'global'
-  //         }
-  //         const roles = [(rolesMap[res.data.isAdmin.toString()] || 'global')]
-  //         store.dispatch('GenerateRoutes', { roles }).then(() => {
-  //           router.addRoutes(store.getters.addRouters)
-  //           next({ ...to })
-  //         })
-  //       })
-  //     } else {
-  //       next()
-  //     }
-  //   }
-  // } else {
-  //   if (whiteList.indexOf(to.path) !== -1) {
-  //     next()
-  //   } else {
-  //     next('/login')
-  //     NProgress.done()
-  //   }
-  // }
 })
 
 router.afterEach(() => {

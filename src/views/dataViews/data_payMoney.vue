@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-05-31 23:53:41
+ * @Last Modified time: 2018-06-04 11:51:45
  */
 
 <template>
@@ -142,7 +142,7 @@ export default {
         {prop: 'financeTurnover', label: '金融房源交易额', sortable: true},
         {prop: 'billAmount', label: '账单数', sortable: true}
       ],
-      url: 'queryBillData'
+      url: '/tongji/data/queryBillData'
     }
   },
   created() {

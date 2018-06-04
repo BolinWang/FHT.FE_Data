@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-05-31 23:48:13
+ * @Last Modified time: 2018-06-04 11:51:50
  */
 
 <template>
@@ -131,7 +131,7 @@ export default {
         {prop: 'consumerUserAmountByIOSApp', label: 'C端租客注册量(IOS)', sortable: true},
         {prop: 'consumerUserAmountByAndroidApp', label: 'C端租客注册量(Andriod)', sortable: true}
       ],
-      url: 'queryUserRegister'
+      url: '/tongji/data/queryUserRegister'
     }
   },
   created() {

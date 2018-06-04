@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:07:11
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-05-31 23:32:38
+ * @Last Modified time: 2018-06-04 13:45:28
  */
 
 import Vue from 'vue'
@@ -51,6 +51,20 @@ export default new Router({
 })
 
 export const asyncRouterMap = [{
+  path: '/userList',
+  component: Layout,
+  redirect: 'noredirect',
+  icon: 'peoples',
+  meta: {
+    role: ['admin']
+  },
+  noDropdown: true,
+  children: [{
+    path: 'userList',
+    component: _import('dataViews/userList'),
+    name: '用户管理'
+  }]
+}, {
   path: '/data_register',
   component: Layout,
   redirect: 'noredirect',

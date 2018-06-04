@@ -1,14 +1,14 @@
 /*
- * @Author: FT.FE.Bolin 
- * @Date: 2018-04-11 17:22:52 
+ * @Author: FT.FE.Bolin
+ * @Date: 2018-04-11 17:22:52
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-04-12 14:15:58
+ * @Last Modified time: 2018-06-04 11:22:12
  */
 
 <template>
   <div class="login-container">
     <el-form autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left" label-width="0px" class="card-box login-form">
-      <h3 class="title">FT_admin-seed</h3>
+      <h3 class="title">复恒科技数据中心</h3>
       <el-form-item prop="mobile">
         <span class="svg-container">
           <icon-svg icon-class="peoples"></icon-svg>
@@ -43,8 +43,8 @@ export default {
       }
     }
     const validatePass = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('密码不能小于6位'))
+      if (value.length < 5) {
+        callback(new Error('密码不能小于5位'))
       } else {
         callback()
       }
@@ -102,6 +102,7 @@ export default {
   background-size: cover;
   background-position: center center;
   input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px rgb(133, 133, 133) inset !important;
     -webkit-box-shadow: 0 0 0px 1000px rgb(133, 133, 133) inset !important;
     -webkit-text-fill-color: #fff !important;
   }

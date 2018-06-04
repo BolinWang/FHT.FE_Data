@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-05-31 23:51:38
+ * @Last Modified time: 2018-06-04 11:51:21
  */
 
 <template>
@@ -131,7 +131,7 @@ export default {
         {prop: 'fhtOnlineFeeForAlipay', label: '复恒公账支付金额(支付宝)', sortable: true},
         {prop: 'fhtOnlineFeeForWechat', label: '复恒公账支付金额(微信)', sortable: true}
       ],
-      url: 'queryFhtFeeData'
+      url: '/tongji/data/queryFhtFeeData'
     }
   },
   created() {

@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:10:13
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-05-31 20:37:22
+ * @Last Modified time: 2018-06-04 11:50:25
  */
 
 import axios from 'axios'
@@ -93,7 +93,7 @@ const responseMehod = (response, resolve, reject) => {
 const judgeMethod = (url, params, method = 'post') => {
   const requestBody = {
     method,
-    url: `/tongji/data/${url}`,
+    url: `${url}`,
     cancelToken: new CancelToken(c => {
       cancelPromise = c
     })

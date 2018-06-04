@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-05-31 23:52:24
+ * @Last Modified time: 2018-06-04 11:51:34
  */
 
 <template>
@@ -159,7 +159,7 @@ export default {
         {prop: 'hostingHouseDelAmount', label: '分散式套数(删除)', sortable: true},
         {prop: 'hostingHouseRoomDelAmount', label: '分散式间数(删除)', sortable: true}
       ],
-      url: 'queryHouseData'
+      url: '/tongji/data/queryHouseData'
     }
   },
   created() {

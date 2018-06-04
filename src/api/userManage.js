@@ -2,23 +2,18 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 16:35:15
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-04-12 16:51:58
+ * @Last Modified time: 2018-06-04 14:33:50
  */
 
 import { fetch } from '@/utils/fetch'
 
-/* 修改个人信息 */
-export function saveSelfDetailApi(params = {}) {
-  return fetch('/user/', {
-    method: 'saveSelfDetail',
-    params
-  })
+/* 重置密码、删除、新增、编辑 */
+export function deleteDataApi(params = {}) {
+  return fetch('user/delete', params)
 }
-
-/* 申请注册获取列表数据 */
-export function queryUserRequestByPageApi(params = {}) {
-  return fetch('/market/apply/', {
-    method: 'queryUserRequestByPage',
-    params
-  })
+export function addDataApi(params = {}) {
+  return fetch('user/add', params)
+}
+export function updateUserApi(params = {}) {
+  return fetch('user/updateUser', params)
 }

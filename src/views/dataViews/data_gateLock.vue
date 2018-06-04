@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-05-31 23:24:26
+ * @Last Modified time: 2018-06-04 11:51:25
  */
 
 <template>
@@ -59,7 +59,7 @@ export default {
         },
         {prop: 'linkCount', label: '连接数', sortable: true}
       ],
-      url: 'getDeviceStatusList'
+      url: '/tongji/data/getDeviceStatusList'
     }
   },
   mounted() {

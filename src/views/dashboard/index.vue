@@ -1,8 +1,8 @@
 /*
- * @Author: FT.FE.Bolin 
- * @Date: 2018-04-11 17:11:02 
- * @Last Modified by:   FT.FE.Bolin 
- * @Last Modified time: 2018-04-11 17:11:02 
+ * @Author: FT.FE.Bolin
+ * @Date: 2018-04-11 17:11:02
+ * @Last Modified by: FT.FE.Bolin
+ * @Last Modified time: 2018-06-04 11:41:56
  */
 
 <template>
@@ -20,8 +20,7 @@ export default {
     rolesFilter(value) {
       const valueMap = {
         'admin': '【超级管理员】',
-        'global': '【普通用户】',
-        'service': '【服务用户】'
+        'global': '【普通用户】'
       }
       return valueMap[value] || '【普通用户】'
     }
