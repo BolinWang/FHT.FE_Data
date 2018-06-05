@@ -1,7 +1,7 @@
 # 柏林
 # 复恒科技数据中心
 
-- [访问地址](https://datacenter.mdguanjia.com)
+- [访问地址](https://test-datacenter.mdguanjia.com)
 
 # 项目结构
 
