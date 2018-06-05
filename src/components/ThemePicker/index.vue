@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:04:21
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-04 10:01:09
+ * @Last Modified time: 2018-06-04 17:20:00
  */
 
 <template>
@@ -13,6 +13,11 @@
 const version = require('element-ui/package.json').version
 // 默认color
 const ORIGINAL_THEME = '#409eff'
+let coverTheme = localStorage.getItem('ORIGINAL_THEME')
+if (!coverTheme) {
+  coverTheme = '#080808'
+  localStorage.setItem('ORIGINAL_THEME', coverTheme)
+}
 
 export default {
   data() {
@@ -22,7 +27,7 @@ export default {
     }
   },
   created() {
-    this.theme = localStorage.getItem('ORIGINAL_THEME') || ORIGINAL_THEME
+    this.theme = coverTheme || ORIGINAL_THEME
   },
   watch: {
     theme(val, oldVal) {
@@ -62,10 +67,6 @@ export default {
         const { innerText } = style
         if (typeof innerText !== 'string') return
         style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
-      })
-      this.$message({
-        message: '换肤成功',
-        type: 'success'
       })
       localStorage.setItem('ORIGINAL_THEME', val)
     }

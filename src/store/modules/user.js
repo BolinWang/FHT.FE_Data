@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:09:27
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-04 13:36:42
+ * @Last Modified time: 2018-06-04 16:59:10
  */
 
 import { login, logout, getInfo } from '@/api/login'
@@ -52,7 +52,7 @@ const user = {
     // 获取用户信息
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
-        getInfo(state.sessionId).then(response => {
+        getInfo(getSessionId()).then(response => {
           const data = response.dataObject || {}
           commit('SET_ROLES', data.isAdmin)
           commit('SET_NAME', data.nickName)

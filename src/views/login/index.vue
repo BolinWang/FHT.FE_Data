@@ -2,13 +2,13 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:22:52
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-04 11:22:12
+ * @Last Modified time: 2018-06-04 15:39:01
  */
 
 <template>
   <div class="login-container">
     <el-form autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left" label-width="0px" class="card-box login-form">
-      <h3 class="title">复恒科技数据中心</h3>
+      <h3 class="title">数据中心</h3>
       <el-form-item prop="mobile">
         <span class="svg-container">
           <icon-svg icon-class="peoples"></icon-svg>
@@ -43,11 +43,7 @@ export default {
       }
     }
     const validatePass = (rule, value, callback) => {
-      if (value.length < 5) {
-        callback(new Error('密码不能小于5位'))
-      } else {
-        callback()
-      }
+      callback()
     }
     return {
       loginForm: {

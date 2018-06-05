@@ -2,13 +2,13 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:10:13
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-04 11:50:25
+ * @Last Modified time: 2018-06-04 18:31:01
  */
 
 import axios from 'axios'
-import { Message } from 'element-ui'
+import { Message, MessageBox } from 'element-ui'
 import qs from 'qs'
-// import store from '../store'
+import store from '../store'
 // import { getSessionId } from '@/utils/auth'
 
 /* 防止重复提交，利用axios的cancelToken */
@@ -53,7 +53,21 @@ service.interceptors.request.use(config => {
 /* respone拦截器 */
 service.interceptors.response.use(
   response => {
-    return response
+    const res = response.data
+    if (!res.msgCode) {
+      return response
+    }
+    if (res.msgCode * 1 === 500) {
+      MessageBox.confirm('登录状态已失效，请重新登录', '提示', {
+        confirmButtonText: '重新登录',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        logOutMethod()
+      })
+    }
+    // eslint-disable-next-line
+    return Promise.reject('error')
   },
   error => {
     console.log('【response】' + error)
@@ -69,12 +83,13 @@ service.interceptors.response.use(
   }
 )
 
-// /* 调用退出系统 */
-// const logOutMethod = () => {
-//   store.dispatch('FedLogOut').then(() => {
-//     location.reload() // 为了重新实例化vue-router对象 避免bug
-//   })
-// }
+/* 调用退出系统 */
+const logOutMethod = () => {
+  store.dispatch('FedLogOut').then(() => {
+    // 为了重新实例化vue-router对象 避免bug
+    location.reload()
+  })
+}
 
 /* axios请求体包装 */
 const responseMehod = (response, resolve, reject) => {
