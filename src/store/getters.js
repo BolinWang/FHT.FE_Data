@@ -1,13 +1,14 @@
 /*
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:08:35
- * @Last Modified by:   FT.FE.Bolin
- * @Last Modified time: 2018-04-11 17:08:35
+ * @Last Modified by: FT.FE.Bolin
+ * @Last Modified time: 2018-06-06 15:45:32
  */
 
 const getters = {
   sidebar: state => state.app.sidebar,
   sessionId: state => state.user.sessionId,
+  userId: state => state.user.userId,
   avatar: state => state.user.avatar,
   name: state => state.user.name,
   roles: state => state.user.roles,

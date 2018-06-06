@@ -2,14 +2,13 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:10:13
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-04 18:31:01
+ * @Last Modified time: 2018-06-06 15:58:46
  */
 
 import axios from 'axios'
 import { Message, MessageBox } from 'element-ui'
 import qs from 'qs'
 import store from '../store'
-// import { getSessionId } from '@/utils/auth'
 
 /* 防止重复提交，利用axios的cancelToken */
 let cancelPromise
@@ -25,9 +24,13 @@ const CancelToken = axios.CancelToken
 // }
 
 /* 创建axios实例 */
+axios.defaults.withCredentials = true
 const service = axios.create({
   baseURL: process.env.BASE_API,
-  headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'},
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+  },
+  withCredentials: true,
   interceptors: true, // 是否开启response拦截器 默认true
   noAssign: false // 请求体是否带defaultConfig 默认false
   // timeout: 5000 // 请求超时时间

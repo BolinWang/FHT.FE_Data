@@ -2,16 +2,20 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:09:27
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-04 16:59:10
+ * @Last Modified time: 2018-06-06 15:48:19
  */
 
 import { login, logout, getInfo } from '@/api/login'
-import { getSessionId, setSessionId, removeSessionId } from '@/utils/auth'
+import {
+  getSessionId, setSessionId, removeSessionId,
+  getUserId, removeUserId, setUserId
+} from '@/utils/auth'
 import defaultAvatar from '@/assets/defaultAvatar.png'
 
 const user = {
   state: {
     sessionId: getSessionId(),
+    userId: getUserId(),
     name: '',
     avatar: '',
     roles: []
@@ -20,6 +24,9 @@ const user = {
   mutations: {
     SET_SESSIONID: (state, sessionId) => {
       state.sessionId = sessionId
+    },
+    SET_USERID: (state, userId) => {
+      state.userId = userId
     },
     SET_NAME: (state, name) => {
       state.name = name
@@ -40,8 +47,10 @@ const user = {
       return new Promise((resolve, reject) => {
         login(mobile, userInfo.password).then(response => {
           const data = response.dataObject || {}
-          setSessionId(data.userId)
-          commit('SET_SESSIONID', data.userId)
+          setSessionId(data.sessionId)
+          setUserId(data.userId)
+          commit('SET_SESSIONID', data.sessionId)
+          commit('SET_USERID', data.userId)
           resolve()
         }).catch(error => {
           reject(error)
@@ -52,7 +61,7 @@ const user = {
     // 获取用户信息
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
-        getInfo(getSessionId()).then(response => {
+        getInfo(getUserId()).then(response => {
           const data = response.dataObject || {}
           commit('SET_ROLES', data.isAdmin)
           commit('SET_NAME', data.nickName)
@@ -69,7 +78,9 @@ const user = {
       return new Promise((resolve, reject) => {
         logout().then(() => {
           removeSessionId()
+          removeUserId()
           commit('SET_SESSIONID', '')
+          commit('SET_USERID', '')
           commit('SET_ROLES', [])
           resolve()
         }).catch(error => {
@@ -82,7 +93,9 @@ const user = {
     FedLogOut({ commit }) {
       return new Promise(resolve => {
         removeSessionId()
+        removeUserId()
         commit('SET_SESSIONID', '')
+        commit('SET_USERID', '')
         resolve()
       })
     }

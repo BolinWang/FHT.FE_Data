@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:22:27
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-04 16:10:24
+ * @Last Modified time: 2018-06-06 15:49:06
  */
 
 <template>
@@ -63,7 +63,7 @@ import ThemePicker from '@/components/ThemePicker'
 import Screenfull from '@/components/Screenfull'
 import { modifyUserApi } from '@/api/userManage'
 import { ObjectMap } from '@/utils'
-import { getSessionId } from '@/utils/auth'
+import { getUserId } from '@/utils/auth'
 import { default as TagsView } from './TagsView'
 
 export default {
@@ -131,7 +131,7 @@ export default {
       this.$refs.ruleForm.validate(valid => {
         if (valid) {
           const saveParams = {
-            userId: getSessionId(),
+            userId: getUserId(),
             nickName: this.ruleForm.name,
             password: this.ruleForm.password
           }
