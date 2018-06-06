@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 16:31:28
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-05 11:39:18
+ * @Last Modified time: 2018-06-06 17:48:33
  */
 
 let path = require('path')
@@ -25,7 +25,7 @@ module.exports = {
         }
       }
     },
-    host: '192.168.5.163',
+    host: 'localhost',
     port: 3344,
     autoOpenBrowser: true,
     errorOverlay: true,

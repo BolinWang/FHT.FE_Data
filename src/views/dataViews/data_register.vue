@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-04 11:51:50
+ * @Last Modified time: 2018-06-06 17:58:02
  */
 
 <template>
@@ -165,8 +165,8 @@ export default {
       this.$refs.refGridUnit.searchHandler()
     },
     dateChange(val) {
-      this.params.startDateStr = val[0]
-      this.params.endDateStr = val[1]
+      this.params.startDateStr = val.length > 0 ? val[0] : ''
+      this.params.endDateStr = val.length > 0 ? val[1] : ''
     },
     startChange(val) {
       this.params.startDateStr = val
