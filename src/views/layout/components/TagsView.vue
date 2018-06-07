@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:22:33
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-07 17:32:25
+ * @Last Modified time: 2018-06-07 17:39:02
  */
 
 <template>
@@ -121,7 +121,6 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-$--color-primary: #409eff;
 .tags-view-container {
   width: calc(100% - 300px);
   display: inline-block;
@@ -129,38 +128,6 @@ $--color-primary: #409eff;
     background: #fff;
     height: 49px;
     line-height: 49px;
-    .tags-view-item {
-      display: inline-block;
-      position: relative;
-      height: 26px;
-      line-height: 26px;
-      border: 1px solid #d8dce5;
-      color: #333;
-      background: #fff;
-      padding: 0 8px;
-      font-size: 12px;
-      margin-left: 5px;
-      border-radius: 4px;
-      &:first-child{
-        margin-left: 0
-      }
-      &.el-button--primary {
-        background-color: $--color-primary;
-        color: #fff;
-        font-weight: 700;
-        border-color:$--color-primary;
-        &::before {
-          content: '';
-          background: #fff;
-          display: inline-block;
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          position: relative;
-          margin-right: 2px;
-        }
-      }
-    }
   }
   .contextmenu {
     margin: 0;
@@ -179,6 +146,35 @@ $--color-primary: #409eff;
         background: #ecf5ff;
         color: #66b1ff;
       }
+    }
+  }
+}
+.tags-view-item {
+  display: inline-block;
+  position: relative;
+  height: 26px;
+  line-height: 26px;
+  border: 1px solid #d8dce5;
+  color: #333;
+  background: #fff;
+  padding: 0 8px;
+  font-size: 12px;
+  margin-left: 5px;
+  border-radius: 4px;
+  &:first-child{
+    margin-left: 0
+  }
+  &.el-button--primary {
+    font-weight: 700;
+    &::before {
+      content: '';
+      background: #fff;
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      position: relative;
+      margin-right: 2px;
     }
   }
 }
