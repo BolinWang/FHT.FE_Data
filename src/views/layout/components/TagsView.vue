@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:22:33
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-07 15:20:41
+ * @Last Modified time: 2018-06-07 16:08:00
  */
 
 <template>
@@ -121,6 +121,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
+$--color-primary: #409eff;
 .tags-view-container {
   width: calc(100% - 300px);
   display: inline-block;
@@ -144,10 +145,10 @@ export default {
         margin-left: 0
       }
       &.active--primary {
-        background-color: #409eff;
+        background-color: $--color-primary;
         color: #fff;
         font-weight: 700;
-        border-color: #409eff;
+        border-color:$--color-primary;
         &::before {
           content: '';
           background: #fff;
