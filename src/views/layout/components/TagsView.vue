@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:22:33
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-07 14:29:46
+ * @Last Modified time: 2018-06-07 15:20:41
  */
 
 <template>
@@ -120,7 +120,7 @@ export default {
 }
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
+<style rel="stylesheet/scss" lang="scss">
 .tags-view-container {
   width: calc(100% - 300px);
   display: inline-block;
