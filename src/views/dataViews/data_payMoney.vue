@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-07 11:36:18
+ * @Last Modified time: 2018-06-07 11:37:24
  */
 
 <template>
@@ -214,7 +214,7 @@ export default {
               return prev
             }
           }, 0)
-          if (column.property != 'billAmount') {
+          if (column.property !== 'billAmount') {
             sums[index] = parseFloat(sums[index]).toFixed(2)
           }
         } else {
