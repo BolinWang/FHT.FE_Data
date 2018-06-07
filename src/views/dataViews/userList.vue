@@ -164,7 +164,7 @@ export default {
     },
     /* 密码重置 */
     resetUserPsw(row) {
-      this.$confirm('此操作将重置该账号初始密码：123456, 是否继续?', '提示', {
+      this.$confirm('当前账号密码将重置为：123456, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'

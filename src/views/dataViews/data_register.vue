@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-06 18:02:17
+ * @Last Modified time: 2018-06-07 10:53:27
  */
 
 <template>
@@ -18,6 +18,7 @@
         <el-date-picker
           v-model="formOptions.timeValue"
           type="daterange"
+          key="1"
           align="right"
           unlink-panels
           range-separator="至"
@@ -32,6 +33,7 @@
         <el-date-picker
           v-model="formOptions.startMonth"
           type="month"
+          key="2"
           align="right"
           placeholder="开始月份"
           style="width: 150px;"
@@ -42,6 +44,7 @@
           <el-date-picker
             v-model="formOptions.endMonth"
             type="month"
+            key="3"
             align="right"
             placeholder="结束月份"
             style="width: 150px;"
