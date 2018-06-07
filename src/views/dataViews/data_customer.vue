@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-07 10:52:31
+ * @Last Modified time: 2018-06-07 10:58:54
  */
 
 <template>
@@ -129,10 +129,10 @@ export default {
       },
       colModels: [
         {prop: 'createTime', label: '时间', width: 150, filter: 'parseTime', sortable: true},
-        {prop: 'customerNormalForMJCount', label: '麦家普通租客', sortable: true},
-        {prop: 'customerFinanceForMJCount', label: '麦家金融租客', sortable: true},
-        {prop: 'customerNormalForNotMJCount', label: '非麦家普通租客', sortable: true},
-        {prop: 'customerFinanceForNotMJCount', label: '非麦家金融租客', sortable: true}
+        {prop: 'customerNormalForMJCount', label: '麦家普通租客', sortable: true, align: 'right'},
+        {prop: 'customerFinanceForMJCount', label: '麦家金融租客', sortable: true, align: 'right'},
+        {prop: 'customerNormalForNotMJCount', label: '非麦家普通租客', sortable: true, align: 'right'},
+        {prop: 'customerFinanceForNotMJCount', label: '非麦家金融租客', sortable: true, align: 'right'}
       ],
       url: '/tongji/data/queryTenants'
     }

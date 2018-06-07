@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-04 11:51:25
+ * @Last Modified time: 2018-06-07 10:59:56
  */
 
 <template>
@@ -40,24 +40,26 @@ export default {
       tableHeight: 300,
       colModels: [
         {prop: 'cityName', label: '城市'},
-        {prop: 'needCount', label: '需安装数', sortable: true},
-        {prop: 'alreadyCount', label: '已安装数', sortable: true},
-        {prop: 'notInstallCount', label: '未安装数', sortable: true},
+        {prop: 'needCount', label: '需安装数', sortable: true, align: 'right'},
+        {prop: 'alreadyCount', label: '已安装数', sortable: true, align: 'right'},
+        {prop: 'notInstallCount', label: '未安装数', sortable: true, align: 'right'},
         {prop: 'installRatio',
           label: '安装率 %',
           sortable: true,
           render(row) {
             return row.installRatio.replace(/%/gi, '') * 1
-          }
+          },
+          align: 'right'
         },
         {prop: 'linkRatio',
           label: '连通率 %',
           sortable: true,
           render(row) {
             return row.linkRatio.replace(/%/gi, '') * 1
-          }
+          },
+          align: 'right'
         },
-        {prop: 'linkCount', label: '连接数', sortable: true}
+        {prop: 'linkCount', label: '连接数', sortable: true, align: 'right'}
       ],
       url: '/tongji/data/getDeviceStatusList'
     }

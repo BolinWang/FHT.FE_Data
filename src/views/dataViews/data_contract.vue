@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-07 10:52:15
+ * @Last Modified time: 2018-06-07 10:58:41
  */
 
 <template>
@@ -150,7 +150,7 @@ export default {
       colModels: [
         {prop: 'organizationName', label: '组织', sortable: true},
         {prop: 'createTime', label: '时间', width: 120, filter: 'parseTime', sortable: true},
-        {prop: 'contractAmount', label: '电子合同份数', sortable: true}
+        {prop: 'contractAmount', label: '电子合同份数', sortable: true, align: 'right'}
       ],
       url: '/tongji/data/queryLeaseContract'
     }

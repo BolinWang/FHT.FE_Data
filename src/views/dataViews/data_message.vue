@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-07 10:51:45
+ * @Last Modified time: 2018-06-07 11:00:50
  */
 
 <template>
@@ -137,7 +137,7 @@ export default {
       },
       colModels: [
         {prop: 'createTime', label: '时间', width: 150, filter: 'parseTime', sortable: true},
-        {prop: 'smsSrlAmount', label: '短信条数', sortable: true}
+        {prop: 'smsSrlAmount', label: '短信条数', sortable: true, align: 'right'}
       ],
       url: '/tongji/data/queryHmsSmsSrl'
     }

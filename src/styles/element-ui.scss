@@ -1,8 +1,8 @@
 /*
- * @Author: FT.FE.Bolin 
- * @Date: 2018-04-11 17:09:44 
- * @Last Modified by:   FT.FE.Bolin 
- * @Last Modified time: 2018-04-11 17:09:44 
+ * @Author: FT.FE.Bolin
+ * @Date: 2018-04-11 17:09:44
+ * @Last Modified by: FT.FE.Bolin
+ * @Last Modified time: 2018-06-07 11:12:16
  */
 
 //覆盖一些element-ui样式 覆盖css样式可在这里添加
@@ -53,7 +53,6 @@
 }
 
 
-
 /* 侧边 */
 
 .app-wrapper {
@@ -64,7 +63,10 @@
   }
 }
 
-
+/* 表格合计 */
+.el-table__footer-wrapper tbody td {
+  font-weight: 700;
+}
 
 /* 面包屑 */
 

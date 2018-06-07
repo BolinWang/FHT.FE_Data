@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-07 10:53:15
+ * @Last Modified time: 2018-06-07 11:01:06
  */
 
 <template>
@@ -139,11 +139,11 @@ export default {
       },
       colModels: [
         {prop: 'createTime', label: '时间', width: 120, filter: 'parseTime', sortable: true},
-        {prop: 'totalTurnover', label: '总交易额', sortable: true},
-        {prop: 'offlineTurnover', label: '线下交易额', sortable: true},
-        {prop: 'onlineTurnover', label: '线上交易额', sortable: true},
-        {prop: 'financeTurnover', label: '金融房源交易额', sortable: true},
-        {prop: 'billAmount', label: '账单数', sortable: true}
+        {prop: 'totalTurnover', label: '总交易额', sortable: true, align: 'right'},
+        {prop: 'offlineTurnover', label: '线下交易额', sortable: true, align: 'right'},
+        {prop: 'onlineTurnover', label: '线上交易额', sortable: true, align: 'right'},
+        {prop: 'financeTurnover', label: '金融房源交易额', sortable: true, align: 'right'},
+        {prop: 'billAmount', label: '账单数', sortable: true, align: 'right'}
       ],
       url: '/tongji/data/queryBillData'
     }

@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-07 10:53:02
+ * @Last Modified time: 2018-06-07 11:00:41
  */
 
 <template>
@@ -139,28 +139,28 @@ export default {
       },
       colModels: [
         {prop: 'createTime', label: '时间', width: 120, filter: 'parseTime', sortable: true},
-        {prop: 'estateAmount', label: '公寓套数', sortable: true},
-        {prop: 'estateRoomAmount', label: '公寓间数', sortable: true},
-        {prop: 'livingEstateRoomAmount', label: '公寓入住间数', sortable: true},
-        {prop: 'notFinanceEstateAmount', label: '公寓套数(非金融房源)', sortable: true},
-        {prop: 'notFInanceEstateRoomAmount', label: '公寓间数(非金融房源)', sortable: true},
-        {prop: 'livingNotFinanceEstateRoomAmount', label: '非金融公寓入住间数', sortable: true},
-        {prop: 'financeEstateAmount', label: '公寓套数(金融房源)', sortable: true},
-        {prop: 'financeEstateRoomAmount', label: '公寓间数(金融房源)', sortable: true},
-        {prop: 'livingFinanceEstateRoomAmount', label: '金融公寓入住间数', sortable: true},
-        {prop: 'estateDelAmount', label: '公寓套数(删除)', sortable: true},
-        {prop: 'estateRoomDelAmount', label: '公寓间数(删除)', sortable: true},
-        {prop: 'hostingHouseAmount', label: '分散式套数', sortable: true},
-        {prop: 'hostingHouseRoomAmount', label: '分散式间数', sortable: true},
-        {prop: 'livingHostingHouseRoomAmount', label: '分散式入住间数', sortable: true},
-        {prop: 'notFinanceHostingHouseAmount', label: '分散式套数(非金融房源)', sortable: true},
-        {prop: 'notFinanceHostingRoomAmount', label: '分散式间数(非金融房源)', sortable: true},
-        {prop: 'livingNotFinanceHostingRoomAmount', label: '非金融分散式入住间数', sortable: true},
-        {prop: 'financeHostingHouseAmount', label: '分散式套数(金融房源)', sortable: true},
-        {prop: 'financeHostingHouseRoomAmount', label: '分散式间数(金融房源)', sortable: true},
-        {prop: 'livingFinanceHostingHouseRoomAmount', label: '金融分散式入住间数', sortable: true},
-        {prop: 'hostingHouseDelAmount', label: '分散式套数(删除)', sortable: true},
-        {prop: 'hostingHouseRoomDelAmount', label: '分散式间数(删除)', sortable: true}
+        {prop: 'estateAmount', label: '公寓套数', sortable: true, align: 'right'},
+        {prop: 'estateRoomAmount', label: '公寓间数', sortable: true, align: 'right'},
+        {prop: 'livingEstateRoomAmount', label: '公寓入住间数', sortable: true, align: 'right'},
+        {prop: 'notFinanceEstateAmount', label: '公寓套数(非金融房源)', sortable: true, align: 'right'},
+        {prop: 'notFInanceEstateRoomAmount', label: '公寓间数(非金融房源)', sortable: true, align: 'right'},
+        {prop: 'livingNotFinanceEstateRoomAmount', label: '非金融公寓入住间数', sortable: true, align: 'right'},
+        {prop: 'financeEstateAmount', label: '公寓套数(金融房源)', sortable: true, align: 'right'},
+        {prop: 'financeEstateRoomAmount', label: '公寓间数(金融房源)', sortable: true, align: 'right'},
+        {prop: 'livingFinanceEstateRoomAmount', label: '金融公寓入住间数', sortable: true, align: 'right'},
+        {prop: 'estateDelAmount', label: '公寓套数(删除)', sortable: true, align: 'right'},
+        {prop: 'estateRoomDelAmount', label: '公寓间数(删除)', sortable: true, align: 'right'},
+        {prop: 'hostingHouseAmount', label: '分散式套数', sortable: true, align: 'right'},
+        {prop: 'hostingHouseRoomAmount', label: '分散式间数', sortable: true, align: 'right'},
+        {prop: 'livingHostingHouseRoomAmount', label: '分散式入住间数', sortable: true, align: 'right'},
+        {prop: 'notFinanceHostingHouseAmount', label: '分散式套数(非金融房源)', sortable: true, align: 'right'},
+        {prop: 'notFinanceHostingRoomAmount', label: '分散式间数(非金融房源)', sortable: true, align: 'right'},
+        {prop: 'livingNotFinanceHostingRoomAmount', label: '非金融分散式入住间数', sortable: true, align: 'right'},
+        {prop: 'financeHostingHouseAmount', label: '分散式套数(金融房源)', sortable: true, align: 'right'},
+        {prop: 'financeHostingHouseRoomAmount', label: '分散式间数(金融房源)', sortable: true, align: 'right'},
+        {prop: 'livingFinanceHostingHouseRoomAmount', label: '金融分散式入住间数', sortable: true, align: 'right'},
+        {prop: 'hostingHouseDelAmount', label: '分散式套数(删除)', sortable: true, align: 'right'},
+        {prop: 'hostingHouseRoomDelAmount', label: '分散式间数(删除)', sortable: true, align: 'right'}
       ],
       url: '/tongji/data/queryHouseData'
     }
