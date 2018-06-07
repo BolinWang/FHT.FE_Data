@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-07 11:01:06
+ * @Last Modified time: 2018-06-07 11:36:18
  */
 
 <template>
@@ -71,6 +71,7 @@
       :formOptions="params"
       :height="tableHeight"
       show-summary
+      :summary-method="summary"
       :showPagination="false">
     </GridUnit>
   </div>
@@ -194,6 +195,33 @@ export default {
       getOrgsApi().then(response => {
         this.orgList = response.dataObject
       })
+    },
+    summary(param) {
+      const { columns, data } = param
+      const sums = []
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = '合计'
+          return
+        }
+        const values = data.map(item => Number(item[column.property]))
+        if (!values.every(value => isNaN(value))) {
+          sums[index] = values.reduce((prev, curr) => {
+            const value = Number(curr)
+            if (!isNaN(value)) {
+              return prev + curr
+            } else {
+              return prev
+            }
+          }, 0)
+          if (column.property != 'billAmount') {
+            sums[index] = parseFloat(sums[index]).toFixed(2)
+          }
+        } else {
+          sums[index] = ''
+        }
+      })
+      return sums
     },
     /* 导出 */
     handleExport() {

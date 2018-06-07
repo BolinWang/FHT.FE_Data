@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:11:19
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-07 10:59:07
+ * @Last Modified time: 2018-06-07 11:31:11
  */
 
 <template>
@@ -64,6 +64,7 @@
       :formOptions="params"
       :height="tableHeight"
       show-summary
+      :summary-method="summary"
       :showPagination="false">
     </GridUnit>
   </div>
@@ -129,10 +130,10 @@ export default {
       },
       colModels: [
         {prop: 'createTime', label: '时间', width: 150, filter: 'parseTime', sortable: true},
-        {prop: 'fhtOnlineFee', label: '复恒公账支付金额', sortable: true, align: 'right'},
-        {prop: 'fhtOnlineFeeForBank', label: '复恒公账支付金额(银行卡)', sortable: true, align: 'right'},
-        {prop: 'fhtOnlineFeeForAlipay', label: '复恒公账支付金额(支付宝)', sortable: true, align: 'right'},
-        {prop: 'fhtOnlineFeeForWechat', label: '复恒公账支付金额(微信)', sortable: true, align: 'right'}
+        {prop: 'fhtOnlineFee', label: '复恒公账支付金额', sortable: true, filter: 'nFixed', align: 'right'},
+        {prop: 'fhtOnlineFeeForBank', label: '复恒公账支付金额(银行卡)', sortable: true, filter: 'nFixed', align: 'right'},
+        {prop: 'fhtOnlineFeeForAlipay', label: '复恒公账支付金额(支付宝)', sortable: true, filter: 'nFixed', align: 'right'},
+        {prop: 'fhtOnlineFeeForWechat', label: '复恒公账支付金额(微信)', sortable: true, filter: 'nFixed', align: 'right'}
       ],
       url: '/tongji/data/queryFhtFeeData'
     }
@@ -176,6 +177,31 @@ export default {
     },
     endChange(val) {
       this.params.endDateStr = val
+    },
+    summary(param) {
+      const { columns, data } = param
+      const sums = []
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = '合计'
+          return
+        }
+        const values = data.map(item => Number(item[column.property]))
+        if (!values.every(value => isNaN(value))) {
+          sums[index] = values.reduce((prev, curr) => {
+            const value = Number(curr)
+            if (!isNaN(value)) {
+              return prev + curr
+            } else {
+              return prev
+            }
+          }, 0)
+          sums[index] = parseFloat(sums[index]).toFixed(2)
+        } else {
+          sums[index] = ''
+        }
+      })
+      return sums
     },
     /* 导出 */
     handleExport() {

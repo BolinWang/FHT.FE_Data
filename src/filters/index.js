@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:06:03
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-04-12 10:34:52
+ * @Last Modified time: 2018-06-07 11:20:15
  */
 
 function pluralize(time, label) {
@@ -105,6 +105,10 @@ export function nFormatter(num, digits) {
     }
   }
   return num.toString()
+}
+
+export function nFixed(num, places = 2) {
+  return num.toFixed(places)
 }
 
 export function html2Text(val) {
