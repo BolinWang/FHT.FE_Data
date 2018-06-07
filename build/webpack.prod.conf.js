@@ -1,8 +1,8 @@
 /*
- * @Author: FT.FE.Bolin 
- * @Date: 2018-04-11 16:31:14 
- * @Last Modified by:   FT.FE.Bolin 
- * @Last Modified time: 2018-04-11 16:31:14 
+ * @Author: FT.FE.Bolin
+ * @Date: 2018-04-11 16:31:14
+ * @Last Modified by: FT.FE.Bolin
+ * @Last Modified time: 2018-06-07 17:21:51
  */
 const path = require('path')
 const utils = require('./utils')
@@ -80,7 +80,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true,
       favicon: resolve('favicon.ico'),
-      title: 'FHT.BOP',
+      title: 'FHT.DataCenter',
       path: config.build.assetsPublicPath + config.build.assetsSubDirectory,
       minify: {
         removeComments: true,

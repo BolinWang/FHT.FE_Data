@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:04:21
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-07 16:21:36
+ * @Last Modified time: 2018-06-07 17:10:14
  */
 
 <template>
@@ -63,12 +63,9 @@ export default {
           const text = style.innerText
           return new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text)
         })
-      console.log(styles)
       styles.forEach(style => {
-        const innerText = style.innerText
-        if (typeof innerText !== 'string') {
-          return
-        }
+        const { innerText } = style
+        if (typeof innerText !== 'string') return
         style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
       })
       localStorage.setItem('ORIGINAL_THEME', val)
