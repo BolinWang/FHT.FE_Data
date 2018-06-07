@@ -2,13 +2,13 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:22:33
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-07 16:08:00
+ * @Last Modified time: 2018-06-07 17:32:25
  */
 
 <template>
   <div class="tags-view-container">
     <scroll-pane class='tags-view-wrapper' ref='scrollPane'>
-      <router-link ref='tag' class="tags-view-item" :class="isActive(tag) ? 'active--primary' : ''" v-for="tag in Array.from(visitedViews)"
+      <router-link ref='tag' class="tags-view-item" :class="isActive(tag) ? 'el-button--primary' : ''" v-for="tag in Array.from(visitedViews)"
         :to="tag.path" :key="tag.path" @contextmenu.prevent.native="openMenu(tag, $event)">
         {{tag.name}}
         <span class='el-icon-remove' @click.prevent.stop='closeSelectedTag(tag)'></span>
@@ -144,7 +144,7 @@ $--color-primary: #409eff;
       &:first-child{
         margin-left: 0
       }
-      &.active--primary {
+      &.el-button--primary {
         background-color: $--color-primary;
         color: #fff;
         font-weight: 700;
