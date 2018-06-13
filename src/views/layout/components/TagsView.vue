@@ -2,7 +2,7 @@
  * @Author: FT.FE.Bolin
  * @Date: 2018-04-11 17:22:33
  * @Last Modified by: FT.FE.Bolin
- * @Last Modified time: 2018-06-07 17:39:02
+ * @Last Modified time: 2018-06-13 10:09:25
  */
 
 <template>
@@ -38,6 +38,9 @@ export default {
   computed: {
     visitedViews() {
       return this.$store.state.tagsView.visitedViews
+    },
+    sidebar() {
+      return this.$store.state.app.sidebar
     }
   },
   watch: {
@@ -110,7 +113,7 @@ export default {
     openMenu(tag, e) {
       this.visible = true
       this.selectedTag = tag
-      this.left = e.clientX
+      this.left = e.clientX - (this.sidebar.opened ? 180 : 40)
       this.top = e.clientY
     },
     closeMenu() {
